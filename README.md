@@ -29,8 +29,7 @@ optional arguments:
                         Set curve offset
   -c CORECOUNT, --corecount CORECOUNT
                         Set offset to cores [0..corecount]
-  -r, --reset           Reset offsets to 0
-  -f, --force           Force positive offset if you really want to risk burning your CPU.
+  -r, --reset           Reset offsets to 0  
 ```
 
 3. The tool gives yu ability to see and write the PBO curve offsets on the fly. The corecount enables writing the offset to all the hardware cpu cores. On 5800x3d you have 8 cores (other 8 are virtual hyperthreading counterparts). So in my case Ill use it like this:
@@ -47,4 +46,4 @@ Core 6 set to: -30 readback:-30
 Core 7 set to: -30 readback:-30
 ```
 The "readback" in the response indicates what value was stored in the registers. I found out that if ill try to push it further than -30 it will always read back -30 so there is a hardware limit to the number. All offsets will reset on reboot so install this commanline as a service to automate things at reboots.
-The force option lets apply positive offsets. I dont know how safe these are and I dont recommend experimenting with this.
+The offsets need to be negative as we want to undervolt the CPU.

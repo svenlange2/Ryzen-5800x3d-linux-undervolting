@@ -9,7 +9,7 @@ git clone https://github.com/leogx9r/ryzen_smu
 cd ryzen_smu
 sudo make dkms-install
 ```
-Now make a reboot. The dkms-install should make a new module into you system called "ryzen_smu". It will autostart next time you reboot your system. Without it the provided Python script will not function.<br>
+Now make a reboot. The dkms-install should make a new module into you system called "ryzen_smu". It will autostart next time you reboot your system. Without it the provided Python script will not function.<br><br>
 2. When you have the driver installed and functioning clone this repository and start the undervolting tool.
 ```pwsh
 git clone https://github.com/svenlange2/Ryzen-5800x3d-linux-undervolting.git
@@ -32,7 +32,8 @@ optional arguments:
   -r, --reset           Reset offsets to 0
   -f, --force           Force positive offset if you really want to risk burning your CPU.
 ```
-The tool gives yu ability to see and write the PBO curve offsets on the fly. The corecount enables writng the offset to all the hardware cpus cores. On 5800x3d you have 8 cores (other 8 are virtual hyperthreading counterparts). So in my case Ill use it like this:
+<br><br>
+3. The tool gives yu ability to see and write the PBO curve offsets on the fly. The corecount enables writng the offset to all the hardware cpus cores. On 5800x3d you have 8 cores (other 8 are virtual hyperthreading counterparts). So in my case Ill use it like this:
 ```pwsh
 sudo python3 ruv.py -c 8 -o -30
 Core 0 set to: -30 readback:-30

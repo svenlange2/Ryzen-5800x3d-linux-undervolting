@@ -9,3 +9,8 @@ git clone https://github.com/leogx9r/ryzen_smu
 cd ryzen_smu
 make dkms-install
 ```
+Now make areboot. The dkms-install should make a new module into you system called "ryzen_smu". It will autostart next time you reboot your system. Without it the provided Python script will not function.
+2. When you have the driver installed and functioning clone this repository and start the undervolting tool.
+```pwsh
+aaa
+```

@@ -45,4 +45,4 @@ Core 6 set to: -30 readback:-30
 Core 7 set to: -30 readback:-30
 ```
 The "readback" in the response indicates what value was stored in the registers. I found out that if ill try to push it firther than -30 it will always read back -30 so there is a hardware limit to the number.
-The force option lets apply positive offsets. I dont know how safe these are and I dont reconnend experimenting with this.
+The force option lets apply positive offsets. I dont know how safe these are and I dont recommend experimenting with this.

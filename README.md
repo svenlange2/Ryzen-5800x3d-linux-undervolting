@@ -7,14 +7,14 @@ This is a linux implementation of the PBO2 undevolting tool used to undervolt Ry
 ```pwsh
 git clone https://github.com/leogx9r/ryzen_smu
 cd ryzen_smu
-make dkms-install
+sudo make dkms-install
 ```
 Now make a reboot. The dkms-install should make a new module into you system called "ryzen_smu". It will autostart next time you reboot your system. Without it the provided Python script will not function.
 2. When you have the driver installed and functioning clone this repository and start the undervolting tool.
 ```pwsh
 git clone https://github.com/svenlange2/Ryzen-5800x3d-linux-undervolting.git
 cd Ryzen-5800x3d-linux-undervolting
-Python3 ruv.py
+sudo Python3 ruv.py
 ```
 You should see this output:
 ```pwsh
@@ -34,7 +34,7 @@ optional arguments:
 ```
 The tool gives yu ability to see and write the PBO curve offsets on the fly. The corecount enables writng the offset to all the hardware cpus cores. On 5800x3d you have 8 cores (other 8 are virtual hyperthreading counterparts). So in my case Ill use it like this:
 ```pwsh
-python3 ruv.py -c 8 -o -30
+sudo python3 ruv.py -c 8 -o -30
 Core 0 set to: -30 readback:-30
 Core 1 set to: -30 readback:-30
 Core 2 set to: -30 readback:-30

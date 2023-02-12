@@ -123,14 +123,10 @@ parser.add_argument('-l', '--list', action='store_true', help='List curve offset
 parser.add_argument('-o', '--offset', type=int, help='Set curve offset')
 parser.add_argument('-c', '--corecount', default=1, type=int, help='Set offset to cores [0..corecount]')
 parser.add_argument('-r','--reset', action='store_true', help='Reset offsets to 0')
-parser.add_argument('-f','--force', action='store_true', help='Force positive offset if you really want to risk burning your CPU.')
 
 
 args = parser.parse_args()
 cc=1
-force=False
-if args.force:
-   force=True
 if args.corecount:
    cc=args.corecount
 
@@ -140,15 +136,15 @@ if args.list:
         quit()
 if args.reset:
         smu_command(0x36,0)
-        print("Offsets set to 0 mV on all cores!")
+        print("Offsets set to 0 on all cores!")
         quit()
 if args.offset:
         for c in range(0,cc):
-                if args.offset < 0 or force==True:
+                if args.offset < 0:
                    setCoreOffset(c,args.offset)
                    print('Core ' + str(c) + ' set to: ' + str(args.offset)+ ' readback:'+str(getCoreOffset(c)))
                 else:
-                   print("Offset needs to be negative! Use -f to override at your own responsibility!")
+                   print("Offset needs to be negative!")
                    quit()
 else:
     parser.print_help()

@@ -33,7 +33,7 @@ optional arguments:
   -f, --force           Force positive offset if you really want to risk burning your CPU.
 ```
 
-3. The tool gives yu ability to see and write the PBO curve offsets on the fly. The corecount enables writng the offset to all the hardware cpus cores. On 5800x3d you have 8 cores (other 8 are virtual hyperthreading counterparts). So in my case Ill use it like this:
+3. The tool gives yu ability to see and write the PBO curve offsets on the fly. The corecount enables writng the offset to all the hardware cpu cores. On 5800x3d you have 8 cores (other 8 are virtual hyperthreading counterparts). So in my case Ill use it like this:
 
 ```pwsh
 sudo python3 ruv.py -c 8 -o -30

@@ -18,7 +18,7 @@ sudo Python3 ruv.py
 ```
 You should see this output:
 ```pwsh
-usage: ruv.py [-h] [-l] [-o OFFSET] [-c CORECOUNT] [-r] [-f]
+usage: ruv.py [-h] [-l] [-o OFFSET] [-c CORECOUNT] [-r]
 
 PBO undervolt for Ryzen processors
 

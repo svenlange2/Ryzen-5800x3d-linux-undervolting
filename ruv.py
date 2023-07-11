@@ -140,11 +140,11 @@ if args.reset:
         quit()
 if args.offset:
         for c in range(0,cc):
-                if args.offset < 0:
-                   set_core_offset(c,args.offset)
-                   print('Core {} set to: {} readback: {}'.format(c, args.offset, get_core_offset(c)))
-                else:
-                   print("Offset needs to be negative!")
-                   quit()
+                if args.offset >= 0:
+                    print("Offset needs to be negative!")
+                    quit()
+
+                set_core_offset(c, args.offset)
+                print('Core {} set to: {} readback: {}'.format(c, args.offset, get_core_offset(c)))
 else:
     parser.print_help()

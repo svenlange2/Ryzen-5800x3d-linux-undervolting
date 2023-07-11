@@ -92,13 +92,13 @@ def smu_command(op, arg1, arg2 = 0, arg3 = 0, arg4 = 0, arg5 = 0, arg6 = 0):
 
     return args
 
-def getCoreOffset(core_id):
+def get_core_offset(core_id):
     value=smu_command(0x48,((core_id & 8) << 5 | core_id & 7) << 20)[0]
     if value > 2**31:
        value=value-2**32
     return value
 
-def setCoreOffset(core_id,value):
+def set_core_offset(core_id,value):
     smu_command(0x35,((core_id & 8) << 5 | core_id & 7) << 20 | value & 0xffff)
 
 
@@ -128,7 +128,7 @@ if args.corecount:
 
 if args.list:
         for c in range(0,cc):
-                print('Core {}: {}'.format(c, getCoreOffset))
+                print('Core {}: {}'.format(c, get_core_offset(c)))
         quit()
 if args.reset:
         smu_command(0x36,0)
@@ -137,8 +137,8 @@ if args.reset:
 if args.offset:
         for c in range(0,cc):
                 if args.offset < 0:
-                   setCoreOffset(c,args.offset)
-                   print('Core {} set to: {} readback: {}'.format(c, args.offset, getCoreOffset(c)))
+                   set_core_offset(c,args.offset)
+                   print('Core {} set to: {} readback: {}'.format(c, args.offset, get_core_offset(c)))
                 else:
                    print("Offset needs to be negative!")
                    quit()

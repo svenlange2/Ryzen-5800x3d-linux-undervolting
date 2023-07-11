@@ -54,14 +54,15 @@ def write_file192(file, *values):
 def smu_command(op, arg1, arg2 = 0, arg3 = 0, arg4 = 0, arg5 = 0, arg6 = 0):
     # Check if SMU is currently executing a command
     value = read_file32(MP1_CMD)
-    if value != False:
-        while int(value) == 0:
-            print("Wating for existing SMU command to complete ...")
-            sleep(1)
-            value = read_file32(MP1_CMD)
-    else:
+    if value == False:
         print("Failed to get SMU status response")
         return False
+
+    while int(value) == 0:
+        print("Waiting for existing SMU command to complete...")
+        sleep(1)
+        value = read_file32(MP1_CMD)
+
 
     # Write all arguments to the appropriate files
     if write_file192(SMU_ARGS, arg1, arg2, arg3, arg4, arg5, arg6) == False:
@@ -74,14 +75,14 @@ def smu_command(op, arg1, arg2 = 0, arg3 = 0, arg4 = 0, arg5 = 0, arg6 = 0):
 
     # Check for the result:
     value = read_file32(MP1_CMD)
-    if value != False:
-        while value == 0:
-            print("Wating for existing SMU command to complete ...")
-            sleep(1)
-            value = read_file32(MP1_CMD)
-    else:
+    if value == False:
         print("SMU OP readback returned false")
         return False
+
+    while value == 0:
+        print("Waiting for existing SMU command to complete...")
+        sleep(1)
+        value = read_file32(MP1_CMD)
 
     if value != 1:
         print("SMU Command Result Failed: " + value)

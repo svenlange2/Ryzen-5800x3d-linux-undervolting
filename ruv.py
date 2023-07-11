@@ -52,8 +52,6 @@ def write_file192(file, *values):
     return result == 24
 
 def smu_command(op, arg1, arg2 = 0, arg3 = 0, arg4 = 0, arg5 = 0, arg6 = 0):
-    check = True
-
     # Check if SMU is currently executing a command
     value = read_file32(MP1_CMD)
     if value != False:

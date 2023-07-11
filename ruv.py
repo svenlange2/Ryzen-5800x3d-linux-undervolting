@@ -18,31 +18,36 @@ def driver_loaded():
     return os.path.isfile(VER_PATH)
 
 
-def read_file32(file):
+def read_file(file, size):
     with open(file, "rb") as fp:
-        result = fp.read(4)
-        result = struct.unpack("<I", result)[0]
-
+        result = fp.read(size)
     return result
 
-def write_file32(file, value):
+
+def write_file(file, data):
     with open(file, "wb") as fp:
-        result = fp.write(struct.pack("<I", value))
+        return fp.write(data)
+
+
+def read_file32(file):
+    result = read_file(file, 4)
+    return struct.unpack("<I", result)[0]
+
+def write_file32(file, value):
+    data = struct.pack("<I", value)
+    result = write_file(file, data)
 
     return result == 4
 
 
 def read_file192(file):
-    with open(file, "rb") as fp:
-        result = fp.read(24)
-        result = struct.unpack("<IIIIII", result)
-
-    return result
+    result = read_file(file, 24)
+    return struct.unpack("<IIIIII", result)
 
 
-def write_file192(file, v1, v2, v3, v4, v5, v6):
-    with open(file, "wb") as fp:
-        result = fp.write(struct.pack("<IIIIII", v1, v2, v3, v4, v5, v6))
+def write_file192(file, *values):
+    data = struct.pack("<IIIIII", *values)
+    result = write_file(file, data)
 
     return result == 24
 

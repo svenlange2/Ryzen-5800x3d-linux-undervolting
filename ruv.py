@@ -22,14 +22,12 @@ def read_file32(file):
     with open(file, "rb") as fp:
         result = fp.read(4)
         result = struct.unpack("<I", result)[0]
-        fp.close()
 
     return result
 
 def write_file32(file, value):
     with open(file, "wb") as fp:
         result = fp.write(struct.pack("<I", value))
-        fp.close()
 
     return result == 4
 
@@ -38,7 +36,6 @@ def read_file192(file):
     with open(file, "rb") as fp:
         result = fp.read(24)
         result = struct.unpack("<IIIIII", result)
-        fp.close()
 
     return result
 
@@ -46,7 +43,6 @@ def read_file192(file):
 def write_file192(file, v1, v2, v3, v4, v5, v6):
     with open(file, "wb") as fp:
         result = fp.write(struct.pack("<IIIIII", v1, v2, v3, v4, v5, v6))
-        fp.close()
 
     return result == 24
 

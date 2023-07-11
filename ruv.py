@@ -132,7 +132,7 @@ if args.corecount:
 
 if args.list:
         for c in range(0,cc):
-                print('Core ' + str(c) + ': ' + str(getCoreOffset(c)))
+                print('Core {}: {}'.format(c, getCoreOffset))
         quit()
 if args.reset:
         smu_command(0x36,0)
@@ -142,7 +142,7 @@ if args.offset:
         for c in range(0,cc):
                 if args.offset < 0:
                    setCoreOffset(c,args.offset)
-                   print('Core ' + str(c) + ' set to: ' + str(args.offset)+ ' readback:'+str(getCoreOffset(c)))
+                   print('Core {} set to: {} readback: {}'.format(c, args.offset, getCoreOffset(c)))
                 else:
                    print("Offset needs to be negative!")
                    quit()

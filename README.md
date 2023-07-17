@@ -14,7 +14,7 @@ Now make a reboot. The dkms-install should make a new module into you system cal
 ```pwsh
 git clone https://github.com/svenlange2/Ryzen-5800x3d-linux-undervolting.git
 cd Ryzen-5800x3d-linux-undervolting
-sudo Python3 ruv.py
+sudo python3 ruv.py
 ```
 You should see this output:
 ```pwsh

@@ -120,7 +120,7 @@ if driver_loaded() == False:
     quit()
 
 
-parser = argparse.ArgumentParser(description="PBO undervolt for Ryzen processors")
+parser = argparse.ArgumentParser(description="PBO undervolt for Ryzen 5800X3D processor")
 parser.add_argument("-l", "--list", action="store_true", help="List curve offsets")
 parser.add_argument("-o", "--offset", type=int, help="Set curve offset")
 parser.add_argument(

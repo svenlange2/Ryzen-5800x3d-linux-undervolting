@@ -20,7 +20,7 @@ You should see this output:
 ```pwsh
 usage: ruv.py [-h] [-l] [-o OFFSET] [-c CORECOUNT] [-r]
 
-PBO undervolt for Ryzen processors
+PBO undervolt for Ryzen 5800X3D processor
 
 optional arguments:
   -h, --help            show this help message and exit

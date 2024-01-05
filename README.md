@@ -45,5 +45,6 @@ Core 5 set to: -30 readback:-30
 Core 6 set to: -30 readback:-30
 Core 7 set to: -30 readback:-30
 ```
-The "readback" in the response indicates what value was stored in the registers. I found out that if ill try to push it further than -30 it will always read back -30 so there is a hardware limit to the number. All offsets will reset on reboot so install this commandline as a service to automate things at reboots.
+
+The "readback" in the response indicates what value was stored in the registers. I found out that if ill try to push it further than -30 it will allways read back -30 so there is a hardware limit to the number. All offsets will reset on reboot so install this commanline as a service to automate things at reboots.
 The offsets need to be negative as we want to undervolt the CPU.

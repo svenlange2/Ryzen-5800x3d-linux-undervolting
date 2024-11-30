@@ -58,7 +58,7 @@ def write_file192(file, *values):
 def smu_command(op, arg1, arg2=0, arg3=0, arg4=0, arg5=0, arg6=0):
     # Check if SMU is currently executing a command
     value = read_file32(MP1_CMD)
-    if value == False:
+    if not value:
         print("Failed to get SMU status response")
         return False
 
@@ -68,17 +68,17 @@ def smu_command(op, arg1, arg2=0, arg3=0, arg4=0, arg5=0, arg6=0):
         value = read_file32(MP1_CMD)
 
     # Write all arguments to the appropriate files
-    if write_file192(SMU_ARGS, arg1, arg2, arg3, arg4, arg5, arg6) == False:
+    if not write_file192(SMU_ARGS, arg1, arg2, arg3, arg4, arg5, arg6):
         print("Failed to write SMU arguments")
         return False
 
     # Write the command
-    if write_file32(MP1_CMD, op) == False:
+    if not write_file32(MP1_CMD, op):
         print("Failed to execute the SMU command: {:08X}".format(op))
 
     # Check for the result:
     value = read_file32(MP1_CMD)
-    if value == False:
+    if not value:
         print("SMU OP readback returned false")
         return False
 
@@ -93,7 +93,7 @@ def smu_command(op, arg1, arg2=0, arg3=0, arg4=0, arg5=0, arg6=0):
 
     args = read_file192(SMU_ARGS)
 
-    if args == False:
+    if not args:
         print("Failed to read SMU response arguments")
         return False
 
@@ -101,26 +101,31 @@ def smu_command(op, arg1, arg2=0, arg3=0, arg4=0, arg5=0, arg6=0):
 
 
 def get_core_offset(core_id):
-    value = smu_command(0x48, ((core_id & 8) << 5 | core_id & 7) << 20)[0]
-    if value > 2**31:
-        value = value - 2**32
-    return value
+    result = smu_command(0x48, ((core_id & 8) << 5 | core_id & 7) << 20)
+    # Result could be a boolean False
+    if result:
+        value = result[0]
+        if value > 2**31:
+            value = value - 2**32
+        return value
 
 
 def set_core_offset(core_id, value):
     smu_command(0x35, ((core_id & 8) << 5 | core_id & 7) << 20 | value & 0xFFFF)
 
 
-if is_root() == False:
+if not is_root():
     print("Script must be run with root privileges.")
-    quit()
+    quit(1)
 
-if driver_loaded() == False:
+if not driver_loaded():
     print("The driver doesn't seem to be loaded.")
-    quit()
+    quit(1)
 
 
-parser = argparse.ArgumentParser(description="PBO undervolt for Ryzen 5800X3D processor")
+parser = argparse.ArgumentParser(
+    description="PBO undervolt for Ryzen 5800X3D processor"
+)
 parser.add_argument("-l", "--list", action="store_true", help="List curve offsets")
 parser.add_argument("-o", "--offset", type=int, help="Set curve offset")
 parser.add_argument(
@@ -146,7 +151,7 @@ if args.offset:
     for c in range(0, cc):
         if args.offset >= 0:
             print("Offset needs to be negative!")
-            quit()
+            quit(1)
 
         set_core_offset(c, args.offset)
         print(
